@@ -1,4 +1,4 @@
-import { ActionIcon, Button, useMantineColorScheme } from "@mantine/core";
+import { ActionIcon, useMantineColorScheme } from "@mantine/core";
 import {
   ChainId,
   ConnectWallet,
@@ -10,9 +10,8 @@ import {
   useNetworkMismatch,
   useNFT,
   useNFTCollection,
-  useNFTDrop,
 } from "@thirdweb-dev/react";
-import type { CustomNextPage, NextPage } from "next";
+import type { CustomNextPage } from "next";
 import { useEffect } from "react";
 import { Layout } from "src/layouts";
 import { Moon, Sun } from "tabler-icons-react";
