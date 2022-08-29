@@ -19,7 +19,7 @@ const MyApp: CustomAppPage = ({ Component, pageProps }) => {
         colorScheme={colorScheme}
         toggleColorScheme={toggleColorScheme}
       >
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
           {getLayout(<Component {...pageProps} />)}
         </MantineProvider>
       </ColorSchemeProvider>
