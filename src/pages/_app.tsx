@@ -14,12 +14,16 @@ const MyApp: CustomAppPage = ({ Component, pageProps }) => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
-    <ThirdwebProvider desiredChainId={ChainId.Mainnet}>
+    <ThirdwebProvider desiredChainId={ChainId.Mumbai}>
       <ColorSchemeProvider
         colorScheme={colorScheme}
         toggleColorScheme={toggleColorScheme}
       >
-        <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+        <MantineProvider
+          theme={{ colorScheme }}
+          withGlobalStyles
+          withNormalizeCSS
+        >
           {getLayout(<Component {...pageProps} />)}
         </MantineProvider>
       </ColorSchemeProvider>
