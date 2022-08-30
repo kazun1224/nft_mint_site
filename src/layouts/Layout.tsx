@@ -10,11 +10,13 @@ export const Layout: CustomLayout = (props) => {
       <Head>
         <title>mumbai mint site</title>
       </Head>
-      <Header />
-      <main className="mx-auto w-full max-w-screen-lg px-5 py-20 md:px-20">
-        {props.children}
-      </main>
-      <Footer />
+      <div className="body">
+        <Header />
+        <main className="mx-auto w-full max-w-screen-lg px-5 py-20 md:px-20">
+          {props.children}
+        </main>
+        <Footer />
+      </div>
     </>
   );
 };
