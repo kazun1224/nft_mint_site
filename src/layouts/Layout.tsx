@@ -11,9 +11,9 @@ export const Layout: CustomLayout = (props) => {
         <title>mumbai mint site</title>
       </Head>
       <Header />
-      <main className="mx-auto w-full max-w-screen-lg px-5 md:px-20 py-20">
+      <main className="mx-auto w-full max-w-screen-lg px-5 py-20 md:px-20">
         {props.children}
-        </main>
+      </main>
       <Footer />
     </>
   );

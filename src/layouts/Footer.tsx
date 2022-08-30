@@ -1,13 +1,8 @@
-import { ActionIcon, useMantineColorScheme } from "@mantine/core";
 import Link from "next/link";
 import { FC } from "react";
 import { pagesPath } from "src/utils/$path";
-import { Moon, Sun } from "tabler-icons-react";
 
 export const Footer: FC = () => {
-  // themeのセットアップ
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === "dark";
   return (
     <footer className="bg-gray-800 text-white">
       <div className="mx-auto w-full max-w-screen-lg px-5 md:px-20">

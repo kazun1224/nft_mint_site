@@ -23,13 +23,27 @@ export const Header: FC = () => {
             <nav className="flex">
               <Link href={pagesPath.mint.$url()}>
                 <a>
-                  <h2 className="text-lg font-bold p-5">mint</h2>
+                  <h2 className="p-5 text-lg font-bold">mint</h2>
                 </a>
               </Link>
-
+              <Link href={pagesPath.collection.$url()}>
+                <a>
+                  <h2 className="p-5 text-lg font-bold">collection</h2>
+                </a>
+              </Link>
+              <Link href={pagesPath.product.$url()}>
+                <a>
+                  <h2 className="p-5 text-lg font-bold">product</h2>
+                </a>
+              </Link>
+              <Link href={pagesPath.owner.$url()}>
+                <a>
+                  <h2 className="p-5 text-lg font-bold">owner</h2>
+                </a>
+              </Link>
               <Link href={pagesPath.start.$url()}>
                 <a>
-                  <h2 className="text-lg font-bold p-5">start</h2>
+                  <h2 className="p-5 text-lg font-bold">start</h2>
                 </a>
               </Link>
             </nav>
