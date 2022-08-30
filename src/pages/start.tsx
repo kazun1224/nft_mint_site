@@ -1,7 +1,8 @@
-import type { NextPage } from "next";
+import type { CustomNextPage } from "next";
+import { Layout } from "src/layouts";
 import { Button, useMediaQuery, useViewportSize } from "src/lib/mantine";
 
-const Start: NextPage = () => {
+const Start: CustomNextPage = () => {
   const { width } = useViewportSize();
   const largerThanXs = useMediaQuery("xs");
   const largerThanSm = useMediaQuery("sm");
@@ -32,5 +33,7 @@ const Start: NextPage = () => {
     </div>
   );
 };
+
+Start.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default Start;
