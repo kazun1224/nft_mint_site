@@ -6,10 +6,12 @@ import {
   useAddress,
   useChainId,
   useMetamask,
+  useMintNFT,
   useNetwork,
   useNetworkMismatch,
   useNFT,
   useNFTCollection,
+  Web3Button,
 } from "@thirdweb-dev/react";
 import type { CustomNextPage } from "next";
 import { useEffect } from "react";
@@ -21,16 +23,16 @@ const Home: CustomNextPage = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
-  // 表示
+  // NFT表示
   const contract = useNFTCollection(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-  const { data: nft, isLoading } = useNFT(contract, 0);
-  console.log(nft);
+  const { data: nft, isLoading } = useNFT(contract, 3);
+  console.log(contract?.mint);
 
   // ネットワークの検知と変更
   const isMismatched = useNetworkMismatch();
+  const connectWithMetamask = useMetamask(); // Connect wallet with Metamask
   const [, switchNetwork] = useNetwork();
   const address = useAddress(); // Get connected wallet address
-  const connectWithMetamask = useMetamask(); // Connect wallet with Metamask
   useEffect(() => {
     if (isMismatched) {
       switchNetwork(ChainId.Mumbai);
@@ -39,19 +41,23 @@ const Home: CustomNextPage = () => {
 
   // ウォレットが接続されているネットワークのチェーン ID
   const chainId = useChainId();
-  // 全体的なデータ
-  // const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+
+  // mint のロジック
+  // const { contract } = useContract(<ContractAddress>);
+  // const {
+  //   mutate: mintNft,
+  //   isLoading,
+  //   error,
+  // } = useMintNFT(contract?.nft);
+
+  // if (error) {
+  //   console.error("failed to mint nft", error);
+  // }
+
 
   return (
-    <div className="p-20 ">
-      <ActionIcon
-        variant="outline"
-        color={dark ? "blue" : "yellow"}
-        onClick={() => toggleColorScheme()}
-        title="Toggle color scheme"
-      >
-        {dark ? <Moon size={18} /> : <Sun size={18} />}
-      </ActionIcon>
+    <div >
+
       <div>
         {/* ウォレット接続ボタン */}
         <ConnectWallet
@@ -66,7 +72,6 @@ const Home: CustomNextPage = () => {
         )}
       </div>
       <hr />
-      {/* ネットワークの検知 */}
       {isMismatched && (
         <button onClick={() => switchNetwork(ChainId.Mumbai)}>
           Switch Network
@@ -79,6 +84,18 @@ const Home: CustomNextPage = () => {
       )}
       <hr />
       <div>{chainId}</div>
+
+      {/* mint button
+
+      <button
+      disabled={isLoading}
+      onClick={() => mintNft({ name: "My awesome NFT!", to: "0x..." })}
+    >
+      Mint!
+    </button> */}
+     {/* <div>
+      <Web3Button contractAddress="0x..." functionName="mint" />
+    </div> */}
     </div>
   );
 };
@@ -86,3 +103,8 @@ const Home: CustomNextPage = () => {
 Home.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default Home;
+
+    function mintNft(arg0: { name: string; to: string; }): void {
+      throw new Error("Function not implemented.");
+    }
+
