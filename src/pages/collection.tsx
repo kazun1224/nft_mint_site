@@ -22,10 +22,8 @@ const Collection: CustomNextPage = () => {
       <Grid gutter="lg" className="mt-10">
         {allTokens.map((token, index) => {
           return (
-            <Grid.Col xs={6} md={4}>
-              <div key={index}>
+            <Grid.Col key={index} xs={6} md={4}>
                 <NftListItem token={token} />
-              </div>
             </Grid.Col>
           );
         })}
