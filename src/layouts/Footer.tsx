@@ -4,7 +4,7 @@ import { pagesPath } from "src/utils/$path";
 
 export const Footer: FC = () => {
   return (
-    <footer className="bg-gray-800 text-white">
+    <footer className="bg-violet-700 text-white">
       <div className="inner">
         <div className="flex items-center justify-between py-5">
           <div>
