@@ -1,4 +1,4 @@
-import { Text } from "@mantine/core";
+import { Grid, Text } from "@mantine/core";
 import { useAddress, useNFTDrop } from "@thirdweb-dev/react";
 import type { CustomNextPage } from "next";
 import { useEffect, useState } from "react";
@@ -30,14 +30,19 @@ const Owner: CustomNextPage = () => {
 
   return (
     <div>
+      <h1>Owner Collection</h1>
       {ownedTokens.length !== 0 ? (
-        ownedTokens.map((token, index) => {
-          return (
-            <li key={index}>
-              <NftListItem token={token} />
-            </li>
-          );
-        })
+        <Grid gutter="lg" className="mt-10">
+          {ownedTokens.map((token, index) => {
+            return (
+              <Grid.Col xs={6} md={4}>
+                <div key={index}>
+                  <NftListItem token={token} />
+                </div>
+              </Grid.Col>
+            );
+          })}
+        </Grid>
       ) : (
         <Text size="md">No Item</Text>
       )}
