@@ -1,16 +1,31 @@
-import { ActionIcon, useMantineColorScheme } from "@mantine/core";
+import {
+  ActionIcon,
+  Burger,
+  Button,
+  CloseButton,
+  useMantineColorScheme,
+} from "@mantine/core";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useConnectWallet } from "src/hooks/useConnectWallet";
 import { pagesPath } from "src/utils/$path";
 import { Moon, Sun } from "tabler-icons-react";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
 
 export const Header: FC = () => {
   // themeのセットアップ
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
+  // wallet接続
+  const { address, connectWallet, disconnectWallet } = useConnectWallet();
+
   //memo drawerの開いているかを確認
-  // const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState);
+  };
   return (
     <header>
       <div className="inner">
@@ -23,29 +38,31 @@ export const Header: FC = () => {
             </Link>
           </div>
           <div className="flex items-center justify-between py-5">
-            <nav className="flex">
-              <Link href={pagesPath.mint.$url()}>
-                <a>
-                  <h2 className="p-5 text-lg font-bold">mint</h2>
-                </a>
-              </Link>
-              <Link href={pagesPath.collection.$url()}>
-                <a>
-                  <h2 className="p-5 text-lg font-bold">collection</h2>
-                </a>
-              </Link>
-              <Link href={pagesPath.owner.$url()}>
-                <a>
-                  <h2 className="p-5 text-lg font-bold">owner</h2>
-                </a>
-              </Link>
-              <Link href={pagesPath.start.$url()}>
-                <a>
-                  <h2 className="p-5 text-lg font-bold">start</h2>
-                </a>
-              </Link>
-            </nav>
-
+            <div className="hidden sm:block">
+              <nav className="flex">
+                <Link href={pagesPath.mint.$url()}>
+                  <a>
+                    <h2 className="p-5 text-lg font-bold">mint</h2>
+                  </a>
+                </Link>
+                <Link href={pagesPath.collection.$url()}>
+                  <a>
+                    <h2 className="p-5 text-lg font-bold">collection</h2>
+                  </a>
+                </Link>
+                <Link href={pagesPath.owner.$url()}>
+                  <a>
+                    <h2 className="p-5 text-lg font-bold">owner</h2>
+                  </a>
+                </Link>
+                <Link href={pagesPath.start.$url()}>
+                  <a>
+                    <h2 className="p-5 text-lg font-bold">start</h2>
+                  </a>
+                </Link>
+              </nav>
+            </div>
+            {/* テーマの切り替え */}
             <ActionIcon
               variant="outline"
               color={dark ? "blue" : "yellow"}
@@ -54,6 +71,63 @@ export const Header: FC = () => {
             >
               {dark ? <Moon size={18} /> : <Sun size={18} />}
             </ActionIcon>
+            {/* walletの接続 */}
+            {address ? (
+              <Button color="violet" size="md" onClick={disconnectWallet}>
+                Connect {address}
+              </Button>
+            ) : (
+              // ウォレット接続ボタン
+              <Button color="violet" size="md" onClick={connectWallet}>
+                Connect Metamask Wallet
+              </Button>
+            )}
+          </div>
+          <div className="sm:hidden ">
+            <button
+              onClick={toggleDrawer}
+              className={`${dark ? "bg-m_dark-7" : "bg-white"}`}
+            >
+              <Burger opened={isOpen} size={30} />
+            </button>
+            <Drawer
+              open={isOpen}
+              onClose={toggleDrawer}
+              direction="right"
+              className="bla bla bla"
+            >
+              <button
+                onClick={toggleDrawer}
+                className={`${dark ? "bg-m_dark-7" : "bg-white"}`}
+              >
+                <CloseButton title="Close Button" size="xl" iconSize={20} />
+              </button>
+
+              <div>
+                <nav className="">
+                  <Link href={pagesPath.mint.$url()}>
+                    <a>
+                      <h2 className="p-5 text-lg font-bold">mint</h2>
+                    </a>
+                  </Link>
+                  <Link href={pagesPath.collection.$url()}>
+                    <a>
+                      <h2 className="p-5 text-lg font-bold">collection</h2>
+                    </a>
+                  </Link>
+                  <Link href={pagesPath.owner.$url()}>
+                    <a>
+                      <h2 className="p-5 text-lg font-bold">owner</h2>
+                    </a>
+                  </Link>
+                  <Link href={pagesPath.start.$url()}>
+                    <a>
+                      <h2 className="p-5 text-lg font-bold">start</h2>
+                    </a>
+                  </Link>
+                </nav>
+              </div>
+            </Drawer>
           </div>
         </div>
       </div>
