@@ -1,6 +1,5 @@
-import { Text, useMantineColorScheme } from "@mantine/core";
+import { Text } from "@mantine/core";
 import { useAddress, useNFTDrop } from "@thirdweb-dev/react";
-
 import type { CustomNextPage } from "next";
 import { useEffect, useState } from "react";
 import { NftListItem } from "src/components/elements/nftListItem";
@@ -28,8 +27,6 @@ const Owner: CustomNextPage = () => {
       setOwnedTokens(owneds);
     }
   }, [address, nftDrop, allTokens]);
-
-  console.log(address, ownedTokens, allTokens);
 
   return (
     <div>
