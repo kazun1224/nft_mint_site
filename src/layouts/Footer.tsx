@@ -5,7 +5,7 @@ import { pagesPath } from "src/utils/$path";
 export const Footer: FC = () => {
   return (
     <footer className="bg-gray-800 text-white">
-      <div className="mx-auto w-full max-w-screen-lg px-5 md:px-20">
+      <div className="inner">
         <div className="flex items-center justify-between py-5">
           <div>
             <Link href={pagesPath.$url()}>

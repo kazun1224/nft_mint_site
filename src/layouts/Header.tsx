@@ -8,9 +8,12 @@ export const Header: FC = () => {
   // themeのセットアップ
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
+
+  //memo drawerの開いているかを確認
+  // const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false)
   return (
     <header>
-      <div className="mx-auto w-full max-w-screen-lg px-5 md:px-20">
+      <div className="inner">
         <div className="flex items-center justify-between py-5">
           <div>
             <Link href={pagesPath.$url()}>

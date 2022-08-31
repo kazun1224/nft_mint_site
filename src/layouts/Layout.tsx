@@ -12,7 +12,7 @@ export const Layout: CustomLayout = (props) => {
       </Head>
       <div className="body">
         <Header />
-        <main className="mx-auto w-full max-w-screen-lg px-5 py-20 md:px-20">
+        <main className="inner--main">
           {props.children}
         </main>
         <Footer />
