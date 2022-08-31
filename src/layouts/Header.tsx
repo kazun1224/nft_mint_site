@@ -2,7 +2,7 @@ import {
   ActionIcon,
   Burger,
   Button,
-  CloseButton,
+  Drawer,
   useMantineColorScheme,
 } from "@mantine/core";
 import Link from "next/link";
@@ -10,8 +10,6 @@ import { FC, useState } from "react";
 import { useConnectWallet } from "src/hooks/useConnectWallet";
 import { pagesPath } from "src/utils/$path";
 import { Moon, Sun } from "tabler-icons-react";
-import Drawer from "react-modern-drawer";
-import "react-modern-drawer/dist/index.css";
 
 export const Header: FC = () => {
   // themeのセットアップ
@@ -84,25 +82,14 @@ export const Header: FC = () => {
             )}
           </div>
           <div className="sm:hidden ">
-            <button
-              onClick={toggleDrawer}
-              className={`${dark ? "bg-m_dark-7" : "bg-white"}`}
-            >
-              <Burger opened={isOpen} size={30} />
-            </button>
+            <Burger onClick={toggleDrawer} opened={isOpen} size={30} />
             <Drawer
-              open={isOpen}
+              opened={isOpen}
               onClose={toggleDrawer}
-              direction="right"
-              className="bla bla bla"
+              position="right"
+              padding="xl"
+              size="61%"
             >
-              <button
-                onClick={toggleDrawer}
-                className={`${dark ? "bg-m_dark-7" : "bg-white"}`}
-              >
-                <CloseButton title="Close Button" size="xl" iconSize={20} />
-              </button>
-
               <div>
                 <nav className="">
                   <Link href={pagesPath.mint.$url()}>
