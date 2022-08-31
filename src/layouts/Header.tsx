@@ -31,11 +31,6 @@ export const Header: FC = () => {
                   <h2 className="p-5 text-lg font-bold">collection</h2>
                 </a>
               </Link>
-              <Link href={pagesPath.product.$url()}>
-                <a>
-                  <h2 className="p-5 text-lg font-bold">product</h2>
-                </a>
-              </Link>
               <Link href={pagesPath.owner.$url()}>
                 <a>
                   <h2 className="p-5 text-lg font-bold">owner</h2>
