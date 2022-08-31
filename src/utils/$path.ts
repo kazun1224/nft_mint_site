@@ -8,9 +8,6 @@ export const pagesPath = {
   "owner": {
     $url: (url?: { hash?: string }) => ({ pathname: '/owner' as const, hash: url?.hash })
   },
-  "product": {
-    $url: (url?: { hash?: string }) => ({ pathname: '/product' as const, hash: url?.hash })
-  },
   "start": {
     $url: (url?: { hash?: string }) => ({ pathname: '/start' as const, hash: url?.hash })
   },
