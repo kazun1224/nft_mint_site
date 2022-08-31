@@ -6,19 +6,16 @@ export type NftListItemProps = {
 };
 export const NftListItem: FC<NftListItemProps> = ({ token }) => {
   return (
-    <header>
-      <div className="mx-auto w-full max-w-screen-lg px-5 md:px-20">
-        <Image
-          width={200}
-          height={200}
-          src={token.metadata.image}
-          alt="NFT"
-          withPlaceholder
-        />
-        <div>
-          <Text size="md">{token.metadata.name}</Text>
-        </div>
+    <div className="mx-auto w-full max-w-screen-lg px-5 md:px-20">
+      <Image
+
+        src={token.metadata.image}
+        alt="NFT"
+        withPlaceholder
+      />
+      <div>
+        <Text size="md">{token.metadata.name}</Text>
       </div>
-    </header>
+    </div>
   );
 };
