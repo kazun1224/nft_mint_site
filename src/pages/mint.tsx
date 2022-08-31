@@ -1,4 +1,4 @@
-import { Button, Text, useMantineColorScheme } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
 import {
   useAddress,
   useClaimedNFTSupply,
@@ -19,47 +19,55 @@ const Mint: CustomNextPage = () => {
   const { connectWallet } = useConnectWallet();
   const address = useAddress();
 
-  // const [isClaiming, setIsClaiming] = useState<boolean>(false);
-  // const [totalSupply, setTotalSupply] = useState<number>(0);
-  // const [claimedSupply, setClaimedSupply] = useState<number>(0);
+  // ミントできるか
+  const [isClaiming, setIsClaiming] = useState<boolean>(false);
 
-  const [claimPrice, setClaimPrice] = useState<string>(""); // 値段
+  // 値段
+  const [claimPrice, setClaimPrice] = useState<string>("");
 
-  // 確認
+  // NFT値段取得
   useEffect(() => {
     nftDrop?.claimConditions.getActive().then((activeClaimCondition) => {
       setClaimPrice(ethers.utils.formatUnits(activeClaimCondition.price._hex));
     });
   }, [nftDrop?.claimConditions]);
 
-  // 確認
-  // const { data: unclaimedNft } = useUnclaimedNFTSupply(nftDrop);
-  // const { data: claimedNft } = useClaimedNFTSupply(nftDrop);
-  // setClaimedSupply(claimedNft?.toNumber() || 0);
-  // setTotalSupply(
-  //   claimedNft && unclaimedNft
-  //     ? claimedNft.toNumber() + unclaimedNft.toNumber()
-  //     : 0
-  // );
+  const [totalSupply, setTotalSupply] = useState<number>(0); // totalSupply コレクション全てのNFT数
+  const [claimedSupply, setClaimedSupply] = useState<number>(0); // claimedSupply ミントされたNFTの数
+  const { data: unclaimedNft } = useUnclaimedNFTSupply(nftDrop); // ミントされてないNFTの数
+  const { data: claimedNft } = useClaimedNFTSupply(nftDrop); // ミント済みNFTの数
+  useEffect(() => {
+    const total =
+      claimedNft && unclaimedNft
+        ? claimedNft.toNumber() + unclaimedNft.toNumber()
+        : 0;
+    const claimed = claimedNft?.toNumber() || 0;
+    setClaimedSupply(claimed);
+    setTotalSupply(total);
+  }, [unclaimedNft, claimedNft]);
 
   return (
     <div>
       {address ? (
-        // <Button onClick={mint} disabled={isClaiming}>
-        //   {isClaiming ? "claiming..." : `MINT (${claimPrice} ETH)`}
-        // </Button>
-        <Button onClick={mint}>mint</Button>
+        <Button onClick={mint} disabled={isClaiming}>
+          {isClaiming ? "claiming..." : `MINT (${claimPrice} MATIC)`}
+        </Button>
       ) : (
-        <Button onClick={connectWallet}>
+        <Button
+          onClick={connectWallet}
+          variant="filled"
+          color="green"
+          size="xl"
+        >
           <Text size="md">Connect Wallet</Text>
         </Button>
       )}
 
-      {/* <Text size="md" align="center">
-        {claimedSupply} / {totalSupply}
-      </Text> */}
       <Text size="md" align="center">
-        rinkeby testnet
+        {claimedSupply} / {totalSupply}
+      </Text>
+      <Text size="md" align="center" color="red">
+        Mumbai testnet
       </Text>
     </div>
   );
