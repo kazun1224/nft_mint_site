@@ -1,5 +1,6 @@
 import {
   useAddress,
+  useDisconnect,
   useMetamask,
   useNetwork,
   useNetworkMismatch,
@@ -11,6 +12,7 @@ export const useConnectWallet = () => {
 
   const [, switchNetwork] = useNetwork();
   const isOnWrongNetwork = useNetworkMismatch();
+  const disconnectWallet = useDisconnect();
 
   const connectWallet = () => {
     if (!address) {
@@ -24,5 +26,5 @@ export const useConnectWallet = () => {
     }
   };
 
-  return { address, connectWallet };
+  return { address, connectWallet, disconnectWallet };
 };
