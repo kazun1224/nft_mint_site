@@ -17,7 +17,7 @@ const Collection: CustomNextPage = () => {
 
   return (
     <div>
-      <h1>NFT一覧</h1>
+      <h1>Collection</h1>
 
       <Grid gutter="lg" className="mt-10">
         {allTokens.map((token, index) => {

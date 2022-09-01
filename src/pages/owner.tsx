@@ -44,7 +44,7 @@ const Owner: CustomNextPage = () => {
           })}
         </Grid>
       ) : (
-        <Text size="md">No Item</Text>
+        <Text size="md" className="mt-10">No Item</Text>
       )}
     </div>
   );
