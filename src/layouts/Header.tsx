@@ -56,6 +56,7 @@ export const Header: FC = () => {
               color={dark ? "blue" : "yellow"}
               onClick={() => toggleColorScheme()}
               title="Toggle color scheme"
+              className="mr-5"
             >
               {dark ? <Moon size={18} /> : <Sun size={18} />}
             </ActionIcon>
