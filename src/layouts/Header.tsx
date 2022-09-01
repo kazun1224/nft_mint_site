@@ -38,11 +38,6 @@ export const Header: FC = () => {
           <div className="flex items-center justify-between py-5">
             <div className="hidden sm:block">
               <nav className="flex">
-                <Link href={pagesPath.mint.$url()}>
-                  <a>
-                    <h2 className="p-5 text-lg font-bold">mint</h2>
-                  </a>
-                </Link>
                 <Link href={pagesPath.collection.$url()}>
                   <a>
                     <h2 className="p-5 text-lg font-bold">collection</h2>
@@ -51,11 +46,6 @@ export const Header: FC = () => {
                 <Link href={pagesPath.owner.$url()}>
                   <a>
                     <h2 className="p-5 text-lg font-bold">owner</h2>
-                  </a>
-                </Link>
-                <Link href={pagesPath.start.$url()}>
-                  <a>
-                    <h2 className="p-5 text-lg font-bold">start</h2>
                   </a>
                 </Link>
               </nav>
@@ -92,11 +82,6 @@ export const Header: FC = () => {
             >
               <div>
                 <nav className="">
-                  <Link href={pagesPath.mint.$url()}>
-                    <a>
-                      <h2 className="p-5 text-lg font-bold">mint</h2>
-                    </a>
-                  </Link>
                   <Link href={pagesPath.collection.$url()}>
                     <a>
                       <h2 className="p-5 text-lg font-bold">collection</h2>
@@ -105,11 +90,6 @@ export const Header: FC = () => {
                   <Link href={pagesPath.owner.$url()}>
                     <a>
                       <h2 className="p-5 text-lg font-bold">owner</h2>
-                    </a>
-                  </Link>
-                  <Link href={pagesPath.start.$url()}>
-                    <a>
-                      <h2 className="p-5 text-lg font-bold">start</h2>
                     </a>
                   </Link>
                 </nav>

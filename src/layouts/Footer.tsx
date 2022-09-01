@@ -16,15 +16,9 @@ export const Footer: FC = () => {
           </div>
           <div className="flex items-center justify-between py-5">
             <nav className="flex">
-              <Link href={pagesPath.mint.$url()}>
+              <Link href={pagesPath.$url()}>
                 <a>
-                  <h2 className="p-5 text-lg font-bold">mint</h2>
-                </a>
-              </Link>
-
-              <Link href={pagesPath.start.$url()}>
-                <a>
-                  <h2 className="p-5 text-lg font-bold">start</h2>
+                  <h2 className="p-5 text-lg font-bold">Home</h2>
                 </a>
               </Link>
             </nav>
