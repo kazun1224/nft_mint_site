@@ -1,4 +1,4 @@
-import { Button, Image, Text } from "@mantine/core";
+import { Button, Image, Text, Container } from "@mantine/core";
 import {
   ChainId,
   ThirdwebNftMedia,
@@ -82,26 +82,31 @@ const Mint: CustomNextPage = () => {
         </Carousel>
       ) : null} */}
       {/* 任意のNFTを表示 */}
-      {!isLoading && nft ? (
-        <ThirdwebNftMedia metadata={nft.metadata} />
-      ) : (
-        <p>Loading...</p>
-      )}
+      <Container size="xs" px="xs">
+        {!isLoading && nft ? (
+          <ThirdwebNftMedia metadata={nft.metadata} />
+        ) : (
+          <p>Loading...</p>
+        )}
+      </Container>
 
-      {address ? (
-        <Button onClick={mint} disabled={isClaiming}>
-          {isClaiming ? "claiming..." : `MINT (${claimPrice} MATIC)`}
-        </Button>
-      ) : (
-        <Button
-          onClick={connectWallet}
-          variant="filled"
-          color="green"
-          size="xl"
-        >
-          <Text size="md">Connect Wallet</Text>
-        </Button>
-      )}
+      <Container size="xs" px="xs" className="text-center mt-10">
+        {address ? (
+          <Button onClick={mint} disabled={isClaiming}>
+            {isClaiming ? "claiming..." : `MINT (${claimPrice} MATIC)`}
+          </Button>
+        ) : (
+          <Button
+            onClick={connectWallet}
+            variant="filled"
+            color="violet"
+            size="xl"
+          >
+            <Text size="md">Connect Wallet</Text>
+          </Button>
+        )}
+      </Container>
+
       {/* チェーン切り替えボタン */}
       {isMismatched && (
         <Button onClick={() => switchNetwork && switchNetwork(ChainId.Mumbai)}>
