@@ -1,95 +1,124 @@
+import { Button, Image, Text } from "@mantine/core";
 import {
   ChainId,
-  ConnectWallet,
   ThirdwebNftMedia,
-  useAddress,
-  useChainId,
-  useMetamask,
   useNetwork,
   useNetworkMismatch,
   useNFT,
   useNFTCollection,
 } from "@thirdweb-dev/react";
 import type { CustomNextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useConnectWallet } from "src/hooks/useConnectWallet";
+import { useItemDetail } from "src/hooks/useItemDetail";
+import { useMint } from "src/hooks/useMint";
 import { Layout } from "src/layouts";
+import { Carousel } from "@mantine/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useNFTDrop } from "@thirdweb-dev/react";
 
-const Home: CustomNextPage = () => {
-  // NFT表示
-  const contract = useNFTCollection(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-  const { data: nft, isLoading } = useNFT(contract, 3);
+const Mint: CustomNextPage = () => {
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
+  const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+  const [allTokens, setAllTokens] = useState<Array<any>>([]);
+  useEffect(() => {
+    nftDrop?.getAll().then((results) => {
+      setAllTokens(results);
+    });
+  }, [nftDrop]);
+
+  // mintする
+  const { mint } = useMint();
+
+  //walletの接続
+  const { address, connectWallet } = useConnectWallet();
+
+  // NFTの状態を取得
+  const { claimPrice, claimedSupply, totalSupply, unclaimedNft } =
+    useItemDetail();
+  console.log(unclaimedNft);
+
+  // // ミントできるか
+  const [isClaiming, setIsClaiming] = useState<boolean>(false);
 
   // ネットワークの検知と変更
   const isMismatched = useNetworkMismatch();
-  const connectWithMetamask = useMetamask(); // Connect wallet with Metamask
   const [, switchNetwork] = useNetwork();
-  const address = useAddress(); // Get connected wallet address
   useEffect(() => {
     if (isMismatched) {
       switchNetwork && switchNetwork(ChainId.Mumbai);
     }
   }, [address, isMismatched, switchNetwork]);
 
-  // ウォレットが接続されているネットワークのチェーン ID
-  const chainId = useChainId();
+  // 任意のNFTを取得
+  const contract = useNFTCollection(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+  const { data: nft, isLoading } = useNFT(contract, 3);
 
-  // mint のロジック
-  // const { contract } = useContract(<ContractAddress>);
-  // const {
-  //   mutate: mintNft,
-  //   isLoading,
-  //   error,
-  // } = useMintNFT(contract?.nft);
-
-  // if (error) {
-  //   console.error("failed to mint nft", error);
-  // }
+  // Carouselの写真
+  // const carouselItem = allTokens.map((token, index) => {
+  //   return (
+  //     <Carousel.Slide  key={index}>
+  //         <Image  src={token.metadata.image} alt="NFT" withPlaceholder />
+  //     </Carousel.Slide>
+  //   );
+  // });
+  // console.log(carouselItem);
 
   return (
     <div>
-      <div>
-        {/* ウォレット接続ボタン */}
-        <ConnectWallet colorMode="light" accentColor="#F213A4" />
-        {/* mintされる前のNFTを表示 */}
-        {!isLoading && nft ? (
-          <ThirdwebNftMedia metadata={nft.metadata} />
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-      <hr />
-      {isMismatched && (
-        <button onClick={() => switchNetwork && switchNetwork(ChainId.Mumbai)}>
-          Switch Network
-        </button>
-      )}
-      {address ? (
-        <h4>Connected as {address}</h4>
+      {/* {allTokens ? (
+        <Carousel
+          slideSize="100%"
+          height={700}
+          slideGap="md"
+          controlsOffset="md"
+          loop
+          withControls={false}
+          plugins={[autoplay.current]}
+          onMouseEnter={autoplay.current.stop}
+          onMouseLeave={autoplay.current.reset}
+        >
+          {[...carouselItem]}
+        </Carousel>
+      ) : null} */}
+      {/* 任意のNFTを表示 */}
+      {!isLoading && nft ? (
+        <ThirdwebNftMedia metadata={nft.metadata} />
       ) : (
-        <button onClick={connectWithMetamask}>Connect Metamask Wallet</button>
+        <p>Loading...</p>
       )}
-      <hr />
-      <div>{chainId}</div>
 
-      {/* mint button
+      {address ? (
+        <Button onClick={mint} disabled={isClaiming}>
+          {isClaiming ? "claiming..." : `MINT (${claimPrice} MATIC)`}
+        </Button>
+      ) : (
+        <Button
+          onClick={connectWallet}
+          variant="filled"
+          color="green"
+          size="xl"
+        >
+          <Text size="md">Connect Wallet</Text>
+        </Button>
+      )}
+      {/* チェーン切り替えボタン */}
+      {isMismatched && (
+        <Button onClick={() => switchNetwork && switchNetwork(ChainId.Mumbai)}>
+          Switch Network
+        </Button>
+      )}
 
-      <button
-      disabled={isLoading}
-      onClick={() => mintNft({ name: "My awesome NFT!", to: "0x..." })}
-    >
-      Mint!
-    </button> */}
-      {/* <div>
-      <Web3Button contractAddress="0x..." functionName="mint" />
-    </div> */}
+      <Text size="md" align="center">
+        {claimedSupply} / {totalSupply}
+      </Text>
+      <Text size="md" align="center" color="red">
+        Mumbai testnet
+      </Text>
     </div>
   );
 };
 
-Home.getLayout = (page) => <Layout>{page}</Layout>;
+Mint.getLayout = (page) => <Layout>{page}</Layout>;
 
-export default Home;
-
-function mintNft(arg0: { name: string; to: string }): void {
-  throw new Error("Function not implemented.");
-}
+export default Mint;
