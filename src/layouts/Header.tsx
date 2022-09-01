@@ -31,7 +31,7 @@ export const Header: FC = () => {
           <div>
             <Link href={pagesPath.$url()}>
               <a>
-                <h2 className="text-3xl font-bold">Parallel Space test net</h2>
+                <h2 className="text-3xl font-bold">Parallel Space</h2>
               </a>
             </Link>
           </div>
@@ -56,7 +56,7 @@ export const Header: FC = () => {
               color={dark ? "blue" : "yellow"}
               onClick={() => toggleColorScheme()}
               title="Toggle color scheme"
-              className="mr-5"
+              className="mr-1"
             >
               {dark ? <Moon size={18} /> : <Sun size={18} />}
             </ActionIcon>
@@ -67,7 +67,7 @@ export const Header: FC = () => {
               </Button>
             ) : (
               // ウォレット接続ボタン
-              <Button color="violet" size="md" onClick={connectWallet}>
+              <Button color="violet" size="xs" onClick={connectWallet}>
                 Connect Metamask Wallet
               </Button>
             )}
