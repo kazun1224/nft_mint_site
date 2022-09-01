@@ -7,6 +7,7 @@ import {
 } from "@mantine/core";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import { useState } from "react";
+import { RecoilRoot } from "recoil";
 
 const MyApp: CustomAppPage = ({ Component, pageProps }) => {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
@@ -14,6 +15,7 @@ const MyApp: CustomAppPage = ({ Component, pageProps }) => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
+    <RecoilRoot>
     <ThirdwebProvider desiredChainId={ChainId.Mumbai}>
       <ColorSchemeProvider
         colorScheme={colorScheme}
@@ -28,6 +30,7 @@ const MyApp: CustomAppPage = ({ Component, pageProps }) => {
         </MantineProvider>
       </ColorSchemeProvider>
     </ThirdwebProvider>
+    </RecoilRoot>
   );
 };
 
