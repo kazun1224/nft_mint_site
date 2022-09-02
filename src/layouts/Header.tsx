@@ -19,6 +19,13 @@ export const Header: FC = () => {
   // wallet接続
   const { address, connectWallet, disconnectWallet } = useConnectWallet();
 
+  // addressの文字列を短くする
+  const excerptAddress = (address:string) => {
+      const newText = address.slice(-5);
+      const excerptText = `...${newText}`;
+      return excerptText;
+  };
+
   //memo drawerの開いているかを確認
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleDrawer = () => {
@@ -62,8 +69,8 @@ export const Header: FC = () => {
             </ActionIcon>
             {/* walletの接続 */}
             {address ? (
-              <Button color="violet" size="md" onClick={disconnectWallet}>
-                Connect {address}
+              <Button color="violet" size="xs" onClick={disconnectWallet}>
+                Connected {excerptAddress(address)}
               </Button>
             ) : (
               // ウォレット接続ボタン
