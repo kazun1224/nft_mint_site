@@ -1,14 +1,12 @@
 import { Button, Image, Text, Container } from "@mantine/core";
 import {
   ChainId,
-  ThirdwebNftMedia,
   useNetwork,
   useNetworkMismatch,
-  useNFT,
-  useNFTCollection,
+  useNFTs,
 } from "@thirdweb-dev/react";
 import type { CustomNextPage } from "next";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useConnectWallet } from "src/hooks/useConnectWallet";
 import { useItemDetail } from "src/hooks/useItemDetail";
 import { useMint } from "src/hooks/useMint";
@@ -20,12 +18,6 @@ import { useNFTDrop } from "@thirdweb-dev/react";
 const Mint: CustomNextPage = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
   const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-  const [allTokens, setAllTokens] = useState<Array<any>>([]);
-  useEffect(() => {
-    nftDrop?.getAll().then((results) => {
-      setAllTokens(results);
-    });
-  }, [nftDrop]);
 
   // mintする
   const { mint } = useMint();
@@ -34,12 +26,7 @@ const Mint: CustomNextPage = () => {
   const { address, connectWallet } = useConnectWallet();
 
   // NFTの状態を取得
-  const { claimPrice, claimedSupply, totalSupply, unclaimedNft } =
-    useItemDetail();
-  console.log(unclaimedNft);
-
-  // // ミントできるか
-  const [isClaiming, setIsClaiming] = useState<boolean>(false);
+  const { claimPrice, claimedSupply, totalSupply } = useItemDetail();
 
   // ネットワークの検知と変更
   const isMismatched = useNetworkMismatch();
@@ -50,50 +37,52 @@ const Mint: CustomNextPage = () => {
     }
   }, [address, isMismatched, switchNetwork]);
 
-  // 任意のNFTを取得
-  const contract = useNFTCollection(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-  const { data: nft, isLoading } = useNFT(contract, 3);
+  console.log(isMismatched);
 
-  // Carouselの写真
-  // const carouselItem = allTokens.map((token, index) => {
-  //   return (
-  //     <Carousel.Slide  key={index}>
-  //         <Image  src={token.metadata.image} alt="NFT" withPlaceholder />
-  //     </Carousel.Slide>
-  //   );
-  // });
-  // console.log(carouselItem);
+  // 任意のNFTを取得
+  const {
+    data: nfts,
+    isLoading,
+    error,
+  } = useNFTs(nftDrop, { start: 0, count: 100 });
+  // console.log(isLoading);
 
   return (
     <div>
-      {/* {allTokens ? (
-        <Carousel
-          slideSize="100%"
-          height={700}
-          slideGap="md"
-          controlsOffset="md"
-          loop
-          withControls={false}
-          plugins={[autoplay.current]}
-          onMouseEnter={autoplay.current.stop}
-          onMouseLeave={autoplay.current.reset}
-        >
-          {[...carouselItem]}
-        </Carousel>
-      ) : null} */}
-      {/* 任意のNFTを表示 */}
-      <Container size="xs" px="xs">
-        {!isLoading && nft ? (
-          <ThirdwebNftMedia metadata={nft.metadata} />
-        ) : (
-          <p>Loading...</p>
-        )}
+      <Container size={300} px={0} className="mt-10 text-center">
+        {nfts ? (
+          <Carousel
+            slideSize="100%"
+            height={300}
+            slideGap="md"
+            controlsOffset="md"
+            loop
+            withControls={false}
+            plugins={[autoplay.current]}
+            onMouseEnter={autoplay.current.stop}
+            onMouseLeave={autoplay.current.reset}
+          >
+            {nfts.map((token, index) => {
+              return (
+                <Carousel.Slide key={index}>
+                  <Image
+                    src={
+                      token.metadata.image ? token.metadata.image : undefined
+                    }
+                    alt="NFT"
+                    withPlaceholder
+                  />
+                </Carousel.Slide>
+              );
+            })}
+          </Carousel>
+        ) : undefined}
       </Container>
 
-      <Container size="xs" px="xs" className="text-center mt-10">
+      <Container className="mt-10 text-center">
         {address ? (
-          <Button onClick={mint} disabled={isClaiming}>
-            {isClaiming ? "claiming..." : `MINT (${claimPrice} MATIC)`}
+          <Button onClick={mint} disabled={isMismatched}>
+            {isMismatched ? "claiming..." : `MINT (${claimPrice} MATIC)`}
           </Button>
         ) : (
           <Button
@@ -108,11 +97,15 @@ const Mint: CustomNextPage = () => {
       </Container>
 
       {/* チェーン切り替えボタン */}
-      {isMismatched && (
-        <Button onClick={() => switchNetwork && switchNetwork(ChainId.Mumbai)}>
-          Switch Network
-        </Button>
-      )}
+      <Container className="mt-5 text-center">
+        {isMismatched && (
+          <Button
+            onClick={() => switchNetwork && switchNetwork(ChainId.Mumbai)}
+          >
+            Switch Network
+          </Button>
+        )}
+      </Container>
 
       <Text size="md" align="center">
         {claimedSupply} / {totalSupply}
