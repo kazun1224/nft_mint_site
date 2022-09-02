@@ -16,16 +16,14 @@ const Owner: CustomNextPage = () => {
       setAllTokens(results);
     });
 
-    if (address) {
-      let owneds: Array<any> = [];
+    let owneds: Array<any> = [];
 
-      allTokens.map((token) => {
-        if (token.owner === address) {
-          owneds = [...owneds, token];
-        }
-      });
-      setOwnedTokens(owneds);
-    }
+    allTokens.map((token) => {
+      if (token.owner === address) {
+        owneds = [...owneds, token];
+      }
+    });
+    setOwnedTokens(owneds);
   }, [address, nftDrop, allTokens]);
 
   return (
@@ -36,13 +34,15 @@ const Owner: CustomNextPage = () => {
           {ownedTokens.map((token, index) => {
             return (
               <Grid.Col xs={6} md={4} key={index}>
-                  <NftListItem token={token} />
+                <NftListItem token={token} />
               </Grid.Col>
             );
           })}
         </Grid>
       ) : (
-        <Text size="md" className="mt-10">No Item</Text>
+        <Text size="md" className="mt-10">
+          No Item
+        </Text>
       )}
     </div>
   );
