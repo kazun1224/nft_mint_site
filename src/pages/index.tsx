@@ -37,15 +37,12 @@ const Mint: CustomNextPage = () => {
     }
   }, [address, isMismatched, switchNetwork]);
 
-  console.log(isMismatched);
-
   // 任意のNFTを取得
   const {
     data: nfts,
     isLoading,
     error,
   } = useNFTs(nftDrop, { start: 0, count: 100 });
-  // console.log(isLoading);
 
   return (
     <div>
@@ -85,12 +82,7 @@ const Mint: CustomNextPage = () => {
             {isMismatched ? "claiming..." : `MINT (${claimPrice} MATIC)`}
           </Button>
         ) : (
-          <Button
-            onClick={connectWallet}
-            variant="filled"
-            color="violet"
-            size="xl"
-          >
+          <Button onClick={connectWallet} variant="filled" color="violet">
             <Text size="md">Connect Wallet</Text>
           </Button>
         )}

@@ -20,10 +20,10 @@ export const Header: FC = () => {
   const { address, connectWallet, disconnectWallet } = useConnectWallet();
 
   // addressの文字列を短くする
-  const excerptAddress = (address:string) => {
-      const newText = address.slice(-5);
-      const excerptText = `...${newText}`;
-      return excerptText;
+  const excerptAddress = (address: string) => {
+    const newText = address.slice(-5);
+    const excerptText = `...${newText}`;
+    return excerptText;
   };
 
   //memo drawerの開いているかを確認
