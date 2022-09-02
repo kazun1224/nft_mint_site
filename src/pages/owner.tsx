@@ -35,10 +35,8 @@ const Owner: CustomNextPage = () => {
         <Grid gutter="lg" className="mt-10">
           {ownedTokens.map((token, index) => {
             return (
-              <Grid.Col xs={6} md={4}>
-                <div key={index}>
+              <Grid.Col xs={6} md={4} key={index}>
                   <NftListItem token={token} />
-                </div>
               </Grid.Col>
             );
           })}

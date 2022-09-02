@@ -33,5 +33,5 @@ export const useItemDetail = () => {
     setTotalSupply(total);
   }, [unclaimedNft, claimedNft]);
 
-  return { claimPrice, claimedSupply, totalSupply ,unclaimedNft};
+  return { claimPrice, claimedSupply, totalSupply };
 };
