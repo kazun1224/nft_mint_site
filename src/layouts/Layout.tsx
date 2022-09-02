@@ -10,6 +10,7 @@ export const Layout: CustomLayout = (props) => {
     <>
       <Head>
         <title>mumbai mint site</title>
+        <meta name="description" content="This site can mint NFTs in parallel space on polygon networks."></meta>
       </Head>
       <div className="body">
         {pageLoading ? (
