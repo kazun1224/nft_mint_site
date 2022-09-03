@@ -47,6 +47,7 @@ const Mint: CustomNextPage = () => {
   return (
     <div>
       <Container size={300} px={0} className="mt-10 text-center">
+        {isLoading? (<div>Loading</div>): null}
         {nfts ? (
           <Carousel
             slideSize="100%"
