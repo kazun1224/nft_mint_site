@@ -8,22 +8,25 @@ import { Layout } from "src/layouts";
 const Collection: CustomNextPage = () => {
   const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
   const [allTokens, setAllTokens] = useState<Array<any>>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  console.log(isLoading);
 
   useEffect(() => {
     nftDrop?.getAll().then((results) => {
       setAllTokens(results);
+      setIsLoading(false);
     });
   }, [nftDrop]);
 
   return (
     <div>
       <h1>Collection</h1>
-
+      {isLoading ? <div>Loading</div> : null}
       <Grid gutter="lg" className="mt-10">
         {allTokens.map((token, index) => {
           return (
             <Grid.Col key={index} xs={6} md={4}>
-                <NftListItem token={token} />
+              <NftListItem token={token} />
             </Grid.Col>
           );
         })}
