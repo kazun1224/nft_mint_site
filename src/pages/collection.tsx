@@ -1,22 +1,11 @@
 import { Grid } from "@mantine/core";
-import { useNFTDrop } from "@thirdweb-dev/react";
 import type { CustomNextPage } from "next";
-import { useEffect, useState } from "react";
 import { NftListItem } from "src/components/elements/nftListItem";
+import { useGetToken } from "src/hooks/useGetTokens";
 import { Layout } from "src/layouts";
 
 const Collection: CustomNextPage = () => {
-  const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-  const [allTokens, setAllTokens] = useState<Array<any>>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  console.log(isLoading);
-
-  useEffect(() => {
-    nftDrop?.getAll().then((results) => {
-      setAllTokens(results);
-      setIsLoading(false);
-    });
-  }, [nftDrop]);
+  const {allTokens,isLoading} = useGetToken();
 
   return (
     <div>
