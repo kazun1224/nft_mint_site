@@ -5,15 +5,22 @@ export const useGetToken = () => {
   const [allTokens, setAllTokens] = useState<Array<any>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [ownedTokens, setOwnedTokens] = useState<Array<any>>([]);
+  const [fetchError, setFetchError] = useState<Error>();
 
   const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
   const address = useAddress();
 
   useEffect(() => {
-    nftDrop?.getAll().then((results) => {
-      setAllTokens(results);
-      setIsLoading(false);
-    });
+    nftDrop
+      ?.getAll()
+      .then((results) => {
+        setAllTokens(results);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        
+        setFetchError(error);
+      });
   }, [nftDrop]);
 
   useEffect(() => {
@@ -24,5 +31,5 @@ export const useGetToken = () => {
     setOwnedTokens(owneds);
   }, [address, allTokens]);
 
-  return { allTokens, isLoading, ownedTokens };
+  return { allTokens, ownedTokens, isLoading, fetchError };
 };
