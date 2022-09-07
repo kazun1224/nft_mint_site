@@ -6,26 +6,23 @@ export const useGetToken = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [ownedTokens, setOwnedTokens] = useState<Array<any>>([]);
 
-
   const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
   const address = useAddress();
-
 
   useEffect(() => {
     nftDrop?.getAll().then((results) => {
       setAllTokens(results);
       setIsLoading(false);
     });
+  }, [nftDrop]);
 
+  useEffect(() => {
     let owneds: Array<any> = [];
 
-    allTokens.map((token) => {
-      if (token.owner === address) {
-        owneds = [...owneds, token];
-      }
-    });
-    setOwnedTokens(owneds);
-  }, [nftDrop,address]);
+    owneds = allTokens.filter((token) => token.owner === address);
 
-  return { allTokens, isLoading ,ownedTokens};
+    setOwnedTokens(owneds);
+  }, [address, allTokens]);
+
+  return { allTokens, isLoading, ownedTokens };
 };
