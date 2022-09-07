@@ -5,7 +5,7 @@ import { useGetToken } from "src/hooks/useGetTokens";
 import { Layout } from "src/layouts";
 
 const Collection: CustomNextPage = () => {
-  const {allTokens,isLoading} = useGetToken();
+  const { allTokens, isLoading } = useGetToken();
 
   return (
     <div>
