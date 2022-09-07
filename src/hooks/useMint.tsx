@@ -7,6 +7,8 @@ import {
   useNetwork,
   useNetworkMismatch,
 } from "@thirdweb-dev/react";
+import { showNotification } from "@mantine/notifications";
+import { Check, ExclamationMark } from "tabler-icons-react";
 
 export const useMint = () => {
   const [isClaiming, setIsClaiming] = useState<boolean>(false);
@@ -34,14 +36,26 @@ export const useMint = () => {
 
     try {
       const minted = await nftDrop?.claim(1);
-      alert(`Successfully minted NFT!`);
+      showNotification({
+        autoClose: 5000,
+        title: "ありがとうございます。",
+        message: "オーナーになりました。",
+        color: "green",
+        icon: <Check />,
+      });
     } catch (error) {
       console.error(error);
-      alert(error);
+      showNotification({
+        autoClose: 5000,
+        title: "失敗しました",
+        message: "もう一度やり直してください。",
+        color: "red",
+        icon: <ExclamationMark />,
+      });
     } finally {
       setIsClaiming && setIsClaiming(false);
     }
   };
 
-  return { mint };
+  return { isClaiming, mint };
 };
