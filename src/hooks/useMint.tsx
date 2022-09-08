@@ -44,7 +44,6 @@ export const useMint = () => {
         icon: <Check />,
       });
     } catch (error) {
-      console.error(error);
       showNotification({
         autoClose: 5000,
         title: "失敗しました",
