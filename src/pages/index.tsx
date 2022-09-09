@@ -1,4 +1,11 @@
-import { Button, Image, Text, Container } from "@mantine/core";
+import {
+  Button,
+  Image,
+  Text,
+  Container,
+  LoadingOverlay,
+  Loader,
+} from "@mantine/core";
 import {
   ChainId,
   useNetwork,
@@ -20,7 +27,7 @@ const Mint: CustomNextPage = () => {
   const nftDrop = useNFTDrop(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
 
   // mintする
-  const { mint } = useMint();
+  const { mint, isClaiming } = useMint();
 
   //walletの接続
   const { address, connectWallet } = useConnectWallet();
@@ -47,7 +54,7 @@ const Mint: CustomNextPage = () => {
   return (
     <div>
       <Container size={300} px={0} className="mt-10 text-center">
-        {isLoading? (<div>Loading</div>): null}
+        {isLoading ? <div>Loading</div> : null}
         {nfts ? (
           <Carousel
             slideSize="100%"
@@ -78,8 +85,14 @@ const Mint: CustomNextPage = () => {
       </Container>
 
       <Container className="mt-10 text-center">
+        {/* Mintボタンを押してメタマスクの操作が終わるまでオーバーレイを表示 */}
+        <LoadingOverlay
+          visible={isClaiming}
+          overlayBlur={2}
+          loader={<Loader color="violet" variant="dots" />}
+        />
         {address ? (
-          <Button onClick={mint} disabled={isMismatched}>
+          <Button onClick={mint} disabled={isMismatched} color="violet">
             {isMismatched ? "claiming..." : `MINT (${claimPrice} MATIC)`}
           </Button>
         ) : (
@@ -90,17 +103,18 @@ const Mint: CustomNextPage = () => {
       </Container>
 
       {/* チェーン切り替えボタン */}
-      <Container className="mt-5 text-center">
-        {isMismatched && (
+      {isMismatched && (
+        <Container className="mt-5 text-center">
           <Button
             onClick={() => switchNetwork && switchNetwork(ChainId.Mumbai)}
+            color="violet"
           >
             Switch Network
           </Button>
-        )}
-      </Container>
+        </Container>
+      )}
 
-      <Text size="md" align="center">
+      <Text size="md" align="center" className="mt-5">
         {claimedSupply} / {totalSupply}
       </Text>
       <Text size="md" align="center" color="red">
