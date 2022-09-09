@@ -35,7 +35,7 @@ export const useMint = () => {
     setIsClaiming && setIsClaiming(true);
 
     try {
-      const minted = await nftDrop?.claim(1);
+      await nftDrop?.claim(1);
       showNotification({
         autoClose: 5000,
         title: "ありがとうございます。",
