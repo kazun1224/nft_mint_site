@@ -185,6 +185,9 @@ module.exports = {
     },
     extend: {
       colors: mantineColors,
+      height:{
+        300: "300px"
+      }
     },
   },
   plugins: [],
