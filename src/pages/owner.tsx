@@ -9,7 +9,7 @@ const Owner: CustomNextPage = () => {
 
   return (
     <div>
-      <h1 className="md:text-2xl font-bold text-lg">Owner Collection</h1>
+      <h1 className="text-lg font-bold md:text-2xl">Owner Collection</h1>
       {ownedTokens.length !== 0 ? (
         <Grid gutter="lg" className="mt-10">
           {ownedTokens.map((token, index) => {

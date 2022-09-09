@@ -1,10 +1,6 @@
-import {
-  ActionIcon,
-  Button,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { ActionIcon, Button, useMantineColorScheme } from "@mantine/core";
 import Link from "next/link";
-import { FC} from "react";
+import { FC } from "react";
 import { DrawerMenu } from "src/components/elements/DrawerMenu";
 import { NavMenu } from "src/components/elements/NavMenu";
 import { useConnectWallet } from "src/hooks/useConnectWallet";
@@ -40,7 +36,7 @@ export const Header: FC = () => {
             </Link>
           </div>
           <div className="flex items-center justify-between py-5">
-            <NavMenu/>
+            <NavMenu />
             {/* テーマの切り替え */}
             <ActionIcon
               variant="outline"

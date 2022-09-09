@@ -23,6 +23,6 @@ export const usePageLoading = () => {
     };
   });
 
-  const loadingComponent = <PageLoading/>;
+  const loadingComponent = <PageLoading />;
   return { pageLoading, loadingComponent };
 };

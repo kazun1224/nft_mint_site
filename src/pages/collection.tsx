@@ -9,7 +9,7 @@ const Collection: CustomNextPage = () => {
 
   return (
     <div>
-      <h1 className="md:text-2xl font-bold text-lg">Collections</h1>
+      <h1 className="text-lg font-bold md:text-2xl">Collections</h1>
       {isLoading ? <div>Loading</div> : null}
       <Grid gutter="lg" className="mt-10">
         {allTokens.map((token, index) => {

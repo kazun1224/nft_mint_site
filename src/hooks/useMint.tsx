@@ -1,6 +1,5 @@
 import { useNFTDrop } from "@thirdweb-dev/react";
 import { useState } from "react";
-
 import {
   useAddress,
   useMetamask,
