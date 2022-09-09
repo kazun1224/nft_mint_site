@@ -21,6 +21,7 @@ import { Layout } from "src/layouts";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useNFTDrop } from "@thirdweb-dev/react";
+import { NftLoading } from "src/components/elements/nftLoading";
 
 const Mint: CustomNextPage = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
@@ -45,16 +46,13 @@ const Mint: CustomNextPage = () => {
   }, [address, isMismatched, switchNetwork]);
 
   // 任意のNFTを取得
-  const {
-    data: nfts,
-    isLoading,
-    error,
-  } = useNFTs(nftDrop, { start: 0, count: 100 });
+  const { data: nfts, isLoading } = useNFTs(nftDrop, { start: 0, count: 100 });
 
   return (
     <div>
       <Container size={300} px={0} className="mt-10 text-center">
-        {isLoading ? <div>Loading</div> : null}
+        <NftLoading isLoading={isLoading} />
+
         {nfts ? (
           <Carousel
             slideSize="100%"

@@ -1,6 +1,7 @@
-import { Grid } from "@mantine/core";
+import { Container, Grid, Loader } from "@mantine/core";
 import type { CustomNextPage } from "next";
 import { NftListItem } from "src/components/elements/nftListItem";
+import { NftLoading } from "src/components/elements/nftLoading";
 import { useGetToken } from "src/hooks/useGetTokens";
 import { Layout } from "src/layouts";
 
@@ -10,7 +11,7 @@ const Collection: CustomNextPage = () => {
   return (
     <div>
       <h1 className="text-lg font-bold md:text-2xl">Collections</h1>
-      {isLoading ? <div>Loading</div> : null}
+      <NftLoading isLoading={isLoading} />
       <Grid gutter="lg" className="mt-10">
         {allTokens.map((token, index) => {
           return (
