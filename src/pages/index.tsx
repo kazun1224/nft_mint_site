@@ -22,6 +22,7 @@ import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useNFTDrop } from "@thirdweb-dev/react";
 import { NftLoading } from "src/components/elements/nftLoading";
+import { useGetToken } from "src/hooks/useGetTokens";
 
 const Mint: CustomNextPage = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
@@ -51,8 +52,15 @@ const Mint: CustomNextPage = () => {
   return (
     <div>
       <Container size={300} px={0} className="mt-10 text-center">
-        <NftLoading isLoading={isLoading} />
-
+        {isLoading ? (
+          <Container
+            size={300}
+            px={0}
+            className="mt-10 grid h-300 place-items-center text-center"
+          >
+            <Loader color="violet" variant="dots" />
+          </Container>
+        ) : null}
         {nfts ? (
           <Carousel
             slideSize="100%"
