@@ -1,12 +1,12 @@
 import { Container, Loader } from "@mantine/core";
 
 import { FC } from "react";
+import { useRecoilValue } from "recoil";
+import { nftLoadingState } from "src/state";
 
-export type Loading = {
-  isLoading: boolean;
-};
+export const NftLoading: FC = () => {
+  const isLoading = useRecoilValue(nftLoadingState);
 
-export const NftLoading: FC<Loading> = ({ isLoading }) => {
   return (
     <>
       {isLoading ? (
