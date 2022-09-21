@@ -1,18 +1,20 @@
 import { Grid, Text } from "@mantine/core";
 import type { CustomNextPage } from "next";
+import { useRecoilValue } from "recoil";
 import { NftListItem } from "src/components/elements/nftListItem";
 import { NftLoading } from "src/components/elements/nftLoading";
 import { useGetToken } from "src/hooks/useGetTokens";
 import { Layout } from "src/layouts";
+import { nftLoadingState } from "src/state";
 
 const Owner: CustomNextPage = () => {
-  const { ownedTokens, isLoading } = useGetToken();
+  const { ownedTokens } = useGetToken();
+  const isLoading = useRecoilValue(nftLoadingState);
 
   return (
     <div>
       <h1 className="text-lg font-bold md:text-2xl">Owner Collection</h1>
-      <NftLoading isLoading={isLoading} />
-
+      <NftLoading />
       {ownedTokens.length !== 0 ? (
         <Grid gutter="lg" className="mt-10">
           {ownedTokens.map((token, index) => {
