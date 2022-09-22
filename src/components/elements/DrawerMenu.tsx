@@ -12,7 +12,7 @@ export const DrawerMenu: FC = () => {
     setIsOpen((prevState) => !prevState);
   };
   return (
-    <div className="fixed bottom-20 right-5 z-50 rounded-full bg-violet-700 p-3 sm:hidden">
+    <div className="fixed bottom-10 right-5 z-50 rounded-full bg-violet-700 p-3 sm:hidden">
       <Burger onClick={toggleDrawer} opened={isOpen} size={30} color="white" />
       <Drawer
         opened={isOpen}
