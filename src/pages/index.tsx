@@ -21,8 +21,6 @@ import { Layout } from "src/layouts";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useNFTDrop } from "@thirdweb-dev/react";
-import { NftLoading } from "src/components/elements/nftLoading";
-import { useGetToken } from "src/hooks/useGetTokens";
 
 const Mint: CustomNextPage = () => {
   const autoplay = useRef(Autoplay({ delay: 2000 }));
