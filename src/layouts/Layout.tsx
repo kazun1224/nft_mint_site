@@ -12,11 +12,12 @@ export const Layout: CustomLayout = (props) => {
   return (
     <>
       <Head>
-        <title>mumbai mint site</title>
+        <title>Parallel Space</title>
         <meta
           name="description"
-          content="This site can mint NFTs in parallel space on polygon networks."
+          content="This site can mint NFTs in Parallel Space on polygon networks."
         ></meta>
+        <link rel="shortcut icon" href="/static/favicon.ico" />
         {width > 360 ? (
           <meta name="viewport" content="width=device-width" />
         ) : (

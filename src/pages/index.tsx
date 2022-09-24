@@ -40,7 +40,7 @@ const Mint: CustomNextPage = () => {
   const [, switchNetwork] = useNetwork();
   useEffect(() => {
     if (isMismatched) {
-      switchNetwork && switchNetwork(ChainId.Mumbai);
+      switchNetwork && switchNetwork(ChainId.Polygon);
     }
   }, [address, isMismatched, switchNetwork]);
 
@@ -110,7 +110,7 @@ const Mint: CustomNextPage = () => {
       {isMismatched && (
         <Container className="mt-5 text-center">
           <Button
-            onClick={() => switchNetwork && switchNetwork(ChainId.Mumbai)}
+            onClick={() => switchNetwork && switchNetwork(ChainId.Polygon)}
             color="violet"
           >
             Switch Network
@@ -122,7 +122,7 @@ const Mint: CustomNextPage = () => {
         {claimedSupply} / {totalSupply}
       </Text>
       <Text size="md" align="center" color="red">
-        Mumbai testnet
+        Polygon Main Net
       </Text>
     </div>
   );

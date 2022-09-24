@@ -17,7 +17,7 @@ const MyApp: CustomAppPage = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <RecoilRoot>
-      <ThirdwebProvider desiredChainId={ChainId.Mumbai}>
+      <ThirdwebProvider desiredChainId={ChainId.Polygon}>
         <ColorSchemeProvider
           colorScheme={colorScheme}
           toggleColorScheme={toggleColorScheme}
