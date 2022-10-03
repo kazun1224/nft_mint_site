@@ -123,8 +123,8 @@ const Mint: CustomNextPage = () => {
         {claimedSupply} / {totalSupply}
       </Text>
       <Text size="md" align="center" color="red">
-        Polygon Main Net
-        ポートフォリオ用のためMintできないようにしています。
+        Polygon Main Net<br/>
+        学習とポートフォリオ用のためMintできないようにしています。
       </Text>
     </div>
   );
