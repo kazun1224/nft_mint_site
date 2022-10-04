@@ -96,8 +96,7 @@ const Mint: CustomNextPage = () => {
           loader={<Loader color="violet" variant="dots" />}
         />
         {address ? (
-          // <Button onClick={mint}  disabled={isMismatched} color="violet">
-          <Button  disabled={isMismatched} color="violet">
+          <Button onClick={mint}  disabled={isMismatched} color="violet">
             {isMismatched ? "claiming..." : `MINT (${claimPrice} MATIC)`}
           </Button>
         ) : (
@@ -123,8 +122,7 @@ const Mint: CustomNextPage = () => {
         {claimedSupply} / {totalSupply}
       </Text>
       <Text size="md" align="center" color="red">
-        Polygon Main Net<br/>
-        学習とポートフォリオ用のためMintできないようにしています。
+        Polygon Main Net
       </Text>
     </div>
   );
