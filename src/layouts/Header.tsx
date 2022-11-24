@@ -28,11 +28,11 @@ export const Header: FC = () => {
         <div className="flex items-center justify-between py-5">
           <div>
             <Link href={pagesPath.$url()}>
-              <a>
-                <h2 className=" text-xl font-bold md:text-3xl">
-                  Parallel Space
-                </h2>
-              </a>
+
+              <h2 className=" text-xl font-bold md:text-3xl">
+                Parallel Space
+              </h2>
+
             </Link>
           </div>
           <div className="flex items-center justify-between py-5">
