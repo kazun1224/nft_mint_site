@@ -1,12 +1,12 @@
 import { useAddress, useNFTDrop } from "@thirdweb-dev/react";
-import { NFTMetadataOwner } from "@thirdweb-dev/sdk";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { nftLoadingState } from "src/state";
+import { NFTTokenData } from "src/types/nft";
 
 export const useGetToken = () => {
-  const [allTokens, setAllTokens] = useState<NFTMetadataOwner[]>([]);
-  const [ownedTokens, setOwnedTokens] = useState<NFTMetadataOwner[]>([]);
+  const [allTokens, setAllTokens] = useState<NFTTokenData[]>([]);
+  const [ownedTokens, setOwnedTokens] = useState<NFTTokenData[]>([]);
   const [fetchError, setFetchError] = useState<Error>();
   const setIsLoading = useSetRecoilState(nftLoadingState);
 
@@ -16,11 +16,11 @@ export const useGetToken = () => {
   useEffect(() => {
     nftDrop
       ?.getAll()
-      .then((results) => {
+      .then((results: any) => {
         setAllTokens(results);
         setIsLoading(false);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         setFetchError(error);
       });
   }, [nftDrop]);
