@@ -1,10 +1,11 @@
 import { Card, Image, Text } from "@mantine/core";
-import { NFTMetadataOwner } from "@thirdweb-dev/sdk";
 import { FC } from "react";
+import { NFTTokenData } from "src/types/nft";
 
-export type NftListItemProps = {
-  token: NFTMetadataOwner;
+type NftListItemProps = {
+  token: NFTTokenData;
 };
+
 export const NftListItem: FC<NftListItemProps> = ({ token }) => {
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>

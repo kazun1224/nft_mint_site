@@ -7,8 +7,8 @@ export const Footer: FC = () => {
     <footer className="bg-violet-700 text-white">
       <div className="inner">
         <div className="py-3 text-center md:py-10">
-          <Link href={pagesPath.$url()}>
-            <a className="text-lg font-bold md:text-xl">Parallel Space</a>
+          <Link href={pagesPath.$url()} className="text-lg font-bold md:text-xl">
+            Parallel Space
           </Link>
         </div>
       </div>

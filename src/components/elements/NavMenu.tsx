@@ -11,7 +11,7 @@ export const NavMenu: FC = () => {
   return (
     <div className="mr-4 hidden sm:block">
       <nav className="flex">
-        <Link href={pagesPath.$url()}>
+        <Link href={pagesPath.$url()} legacyBehavior>
           <NavLink
             component="a"
             label="Home"
@@ -20,7 +20,7 @@ export const NavMenu: FC = () => {
             className="mr-2 rounded-lg px-5 py-2 text-lg font-bold"
           />
         </Link>
-        <Link href={pagesPath.collection.$url()}>
+        <Link href={pagesPath.collection.$url()} legacyBehavior>
           <NavLink
             component="a"
             label="Collection"
@@ -29,7 +29,7 @@ export const NavMenu: FC = () => {
             className="mr-2 rounded-lg px-5 py-2 text-lg font-bold"
           />
         </Link>
-        <Link href={pagesPath.owner.$url()}>
+        <Link href={pagesPath.owner.$url()} legacyBehavior>
           <NavLink
             component="a"
             label="Owner"

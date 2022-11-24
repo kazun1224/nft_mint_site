@@ -22,7 +22,7 @@ export const DrawerMenu: FC = () => {
         size="61%"
       >
         <nav className="p-5">
-          <Link href={pagesPath.$url()}>
+          <Link href={pagesPath.$url()} legacyBehavior>
             <NavLink
               component="a"
               label="Home"
@@ -30,7 +30,7 @@ export const DrawerMenu: FC = () => {
               color="violet"
             />
           </Link>
-          <Link href={pagesPath.collection.$url()}>
+          <Link href={pagesPath.collection.$url()} legacyBehavior>
             <NavLink
               component="a"
               label="Collection"
@@ -38,7 +38,7 @@ export const DrawerMenu: FC = () => {
               color="violet"
             />
           </Link>
-          <Link href={pagesPath.owner.$url()}>
+          <Link href={pagesPath.owner.$url()} legacyBehavior>
             <NavLink
               component="a"
               label="Owner"
