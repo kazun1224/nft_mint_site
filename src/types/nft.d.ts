@@ -1,10 +1,8 @@
-export type NftListItemProps = {
-  token:  {
-    metadata:NFTMetaDate;
-    owner:string;
-    supply: number;
-    type: string;
-  }
+export type NFTTokenData = {
+  metadata: NFTMetaDate;
+  owner: string;
+  supply: number;
+  type: string;
 };
 
 type NFTMetaDate = {
@@ -13,4 +11,4 @@ type NFTMetaDate = {
   image: string;
   name: string;
   uri: string;
-}
+};
